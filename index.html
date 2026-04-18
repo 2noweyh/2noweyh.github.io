@@ -79,6 +79,12 @@
     /* Card hover */
     .card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
     .card-hover:hover { transform: translateY(-2px); }
+    /* Publication card click affordance */
+    article[data-scholar] h3, article[data-href] h3 { transition: color .2s ease; }
+    article[data-scholar]:hover h3, article[data-href]:hover h3 { color: #1a38dd; }
+    .dark article[data-scholar]:hover h3, .dark article[data-href]:hover h3 { color: #8fa4ff; }
+    article[data-scholar]:hover, article[data-href]:hover { box-shadow: 0 8px 24px -8px rgba(26, 56, 221, 0.18); }
+    article[data-scholar]:focus-visible, article[data-href]:focus-visible { outline: 2px solid #1a38dd; outline-offset: 3px; }
 
     /* Timeline dot */
     .timeline-dot::before {
@@ -321,7 +327,7 @@
 
   <div class="space-y-4">
     <!-- PUB 1 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="MR-Pruner: Training-free Multi-resolution Visual Token Pruning for Multi-modal Large Language Models" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">WACV 2026</span>
@@ -337,7 +343,7 @@
     </article>
 
     <!-- PUB 2 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-href="https://www.mdpi.com/2076-3417/16/5/2244" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">Applied Sciences (MDPI)</span>
@@ -359,7 +365,7 @@
     </article>
 
     <!-- PUB 3 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="Sequence-aware adaptive graph convolutional recurrent networks for traffic forecasting" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">Knowledge-Based Systems</span>
@@ -375,7 +381,7 @@
     </article>
 
     <!-- PUB 4 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="MPR-CiteG: Enhancing RAG with Multi-Portfolio Retrieval and Citation-Grounded Generation" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold mono">WKSP</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">CIKM 2025 · RDGenAI</span>
@@ -395,7 +401,7 @@
     </article>
 
     <!-- PUB 5 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="Zero-Shot Industrial Anomaly Segmentation with Image-Aware Prompt Generation" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">PAKDD 2025</span>
@@ -415,7 +421,7 @@
     </article>
 
     <!-- PUB 6 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="Diverse Knowledge Selection for Enhanced Zero-shot Visual Question Answering" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">WWW 2025 Companion</span>
@@ -435,7 +441,7 @@
     </article>
 
     <!-- PUB 7 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="Dynamic Periodic Event Graphs for Multivariate Time Series Pattern Prediction" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">PeerJ Computer Science</span>
@@ -451,7 +457,7 @@
     </article>
 
     <!-- PUB 8 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="A Methodology for LLM-based Zero-shot Anomaly Segmentation in Road Environments" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 font-semibold mono">DOM</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">KSC 2024</span>
@@ -467,7 +473,7 @@
     </article>
 
     <!-- PUB 9 -->
-    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+    <article data-scholar="Performance Comparison of Missing-value Imputation Methods for Graph Deep Learning-based Traffic Prediction" class="card-hover group cursor-pointer p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
       <div class="flex flex-wrap gap-2 mb-2 text-xs">
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 font-semibold mono">DOM</span>
         <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">KSC 2023</span>
@@ -605,6 +611,29 @@
   // --- Footer dates ---
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('updated').textContent = new Date().toISOString().slice(0, 10);
+
+  // --- Publication card click → paper link ---
+  document.querySelectorAll('article[data-scholar], article[data-href]').forEach(card => {
+    const go = () => {
+      const url = card.dataset.href
+        || 'https://scholar.google.com/scholar?q=' + encodeURIComponent(card.dataset.scholar);
+      window.open(url, '_blank', 'noopener');
+    };
+    card.addEventListener('click', (e) => {
+      // Don't hijack clicks on inner links/buttons
+      if (e.target.closest('a, button')) return;
+      go();
+    });
+    // Keyboard accessibility
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        go();
+      }
+    });
+  });
 </script>
 
 </body>
