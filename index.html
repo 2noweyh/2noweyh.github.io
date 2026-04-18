@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyewon Lee — AI Researcher (LLM · GNN · RAG)</title>
+  <meta name="description" content="Hyewon Lee — Post-Master's Researcher at Korea Atomic Energy Research Institute (KAERI). Research on Large Language Models, Graph Neural Networks, Retrieval-Augmented Generation, and Time Series Forecasting." />
+  <meta name="author" content="Hyewon Lee" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hyewon Lee — AI Researcher" />
+  <meta property="og:description" content="Post-Master's Researcher at KAERI. LLM · GNN · RAG · Time Series." />
+  <meta property="og:type" content="website" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Source Serif 4"', '"Source Serif Pro"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            ink: {
+              50:  '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            },
+            brand: {
+              50:  '#eef4ff',
+              100: '#dae6ff',
+              200: '#bcd2ff',
+              300: '#8eb3ff',
+              400: '#5a8bff',
+              500: '#3566ff',
+              600: '#1f47f5',
+              700: '#1a38dd',
+              800: '#1c31b3',
+              900: '#1e308b',
+            },
+            accent: {
+              500: '#d97706',
+              600: '#b45309',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    .serif { font-family: 'Source Serif 4', Georgia, serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    /* Subtle section dividers */
+    .section-line {
+      background-image: linear-gradient(90deg, rgba(100,116,139,0) 0%, rgba(100,116,139,.4) 50%, rgba(100,116,139,0) 100%);
+    }
+
+    /* Card hover */
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .card-hover:hover { transform: translateY(-2px); }
+
+    /* Timeline dot */
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -0.5rem; top: .6rem;
+      width: .65rem; height: .65rem;
+      border-radius: 9999px;
+      background: currentColor;
+      box-shadow: 0 0 0 4px rgba(255,255,255,1);
+    }
+    .dark .timeline-dot::before {
+      box-shadow: 0 0 0 4px #0f172a;
+    }
+
+    /* Print tweaks */
+    @media print {
+      nav, #theme-toggle, .no-print { display: none !important; }
+      body { background: white !important; color: black !important; }
+    }
+
+    /* Smooth scroll offset for sticky nav */
+    section[id] { scroll-margin-top: 5rem; }
+  </style>
+</head>
+
+<body class="bg-ink-50 text-ink-900 antialiased dark:bg-ink-950 dark:text-ink-100">
+
+<!-- =============== NAV =============== -->
+<nav class="sticky top-0 z-40 backdrop-blur-lg bg-ink-50/80 dark:bg-ink-950/80 border-b border-ink-200/60 dark:border-ink-800/60">
+  <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="font-serif text-lg font-semibold tracking-tight">Hyewon Lee</a>
+
+    <div class="hidden md:flex items-center gap-7 text-sm text-ink-600 dark:text-ink-300">
+      <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-400 transition">About</a>
+      <a href="#news" class="hover:text-brand-600 dark:hover:text-brand-400 transition">News</a>
+      <a href="#publications" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Publications</a>
+      <a href="#awards" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Awards</a>
+      <a href="#contact" class="hover:text-brand-600 dark:hover:text-brand-400 transition">Contact</a>
+    </div>
+
+    <button id="theme-toggle" aria-label="Toggle dark mode"
+      class="p-2 rounded-lg border border-ink-200 dark:border-ink-700 hover:bg-ink-100 dark:hover:bg-ink-800 transition">
+      <svg id="theme-icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.485-8.485h1M3.515 12h1m13.071-6.071l.707-.707M6.707 17.293l-.707.707m12.728 0l-.707-.707M6.707 6.707l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <svg id="theme-icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- =============== HERO =============== -->
+<header id="top" class="max-w-5xl mx-auto px-6 pt-16 pb-10 md:pt-24 md:pb-14">
+  <div class="grid md:grid-cols-[auto_1fr] gap-10 items-center">
+    <!-- Avatar -->
+    <div class="mx-auto md:mx-0">
+      <div class="relative">
+        <img
+          src="profile.jpg"
+          alt="Hyewon Lee"
+          class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-white shadow-xl dark:ring-ink-800"
+          onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/136467288?v=4';this.onerror=function(){this.src='https://ui-avatars.com/api/?name=Hyewon+Lee&background=1e308b&color=fff&size=256&bold=true&format=png';};" />
+        <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 rounded-full ring-4 ring-white dark:ring-ink-900" title="Currently at KAERI"></span>
+      </div>
+    </div>
+
+    <!-- Intro -->
+    <div>
+      <p class="text-sm font-medium text-brand-700 dark:text-brand-400 tracking-wide uppercase mb-2">Post-Master's Researcher · KAERI</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-3">
+        Hyewon Lee <span class="text-ink-400 dark:text-ink-500 font-normal">· 이혜원</span>
+      </h1>
+      <p class="text-lg text-ink-600 dark:text-ink-300 leading-relaxed mb-5 max-w-2xl">
+        AI researcher working on <span class="font-semibold text-ink-900 dark:text-ink-100">Large Language Models</span>,
+        <span class="font-semibold text-ink-900 dark:text-ink-100">Graph Neural Networks</span>, and
+        <span class="font-semibold text-ink-900 dark:text-ink-100">Retrieval-Augmented Generation</span> —
+        with a focus on structured reasoning and scientific knowledge systems.
+      </p>
+
+      <!-- Quick links -->
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="mailto:hyewon@kaeri.re.kr"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Email
+        </a>
+        <a href="https://scholar.google.com/citations?user=1arNStIAAAAJ" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ink-300 dark:border-ink-700 hover:bg-ink-100 dark:hover:bg-ink-800 transition">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14.3l-8.4-6.1L12 2l8.4 6.2L12 14.3zm0 2.4l8.4-6.2v9.3L12 24l-8.4-4.2v-9.3L12 16.7z"/></svg>
+          Scholar
+        </a>
+        <a href="https://github.com/2noweyh" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ink-300 dark:border-ink-700 hover:bg-ink-100 dark:hover:bg-ink-800 transition">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.3-3.3-.1-.3-.6-1.5.1-3.2 0 0 1-.3 3.3 1.3a11.5 11.5 0 016 0c2.3-1.6 3.3-1.3 3.3-1.3.7 1.7.2 2.9.1 3.2.8.9 1.3 2 1.3 3.3 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.cnudi.com/" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-ink-300 dark:border-ink-700 hover:bg-ink-100 dark:hover:bg-ink-800 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5.13a4 4 0 11-8 0 4 4 0 018 0zm6 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          Lab (DILAB)
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="section-line h-px max-w-5xl mx-auto"></div>
+
+<!-- =============== ABOUT =============== -->
+<section id="about" class="max-w-5xl mx-auto px-6 py-14">
+  <h2 class="font-serif text-3xl font-bold mb-6 tracking-tight">About</h2>
+
+  <div class="grid md:grid-cols-3 gap-10">
+    <div class="md:col-span-2 space-y-4 text-ink-700 dark:text-ink-300 leading-relaxed">
+      <p>
+        I am a <strong class="text-ink-900 dark:text-ink-100">Post-Master's Researcher</strong> at the
+        <a href="https://www.kaeri.re.kr/eng/" target="_blank" rel="noopener" class="text-brand-700 dark:text-brand-400 hover:underline">Korea Atomic Energy Research Institute (KAERI)</a>,
+        where I conduct research at the intersection of artificial intelligence and scientific domains.
+      </p>
+      <p>
+        I earned my <strong class="text-ink-900 dark:text-ink-100">M.S. in Artificial Intelligence</strong> from
+        <strong class="text-ink-900 dark:text-ink-100">Chungnam National University (CNU)</strong> in February 2026,
+        where I was advised by Prof. Sungsu Lim at the
+        <a href="https://www.cnudi.com/" target="_blank" rel="noopener" class="text-brand-700 dark:text-brand-400 hover:underline">Data Intelligence Laboratory (DILAB)</a>.
+        My undergraduate degree is in
+        <strong class="text-ink-900 dark:text-ink-100">Mathematics</strong>, also from CNU.
+      </p>
+      <p>
+        My research explores how structured knowledge — graphs, citations, and retrieved context — can be
+        combined with large language models to enable more reliable reasoning. I have published at
+        <span class="mono text-sm">WACV · PAKDD · WWW · CIKM Workshops</span> and in SCIE journals
+        <span class="mono text-sm">Knowledge-Based Systems</span> and <span class="mono text-sm">PeerJ Computer Science</span>.
+      </p>
+    </div>
+
+    <aside class="space-y-5 text-sm">
+      <div>
+        <h3 class="font-semibold text-ink-900 dark:text-ink-100 mb-2 uppercase tracking-wider text-xs">Research Interests</h3>
+        <ul class="space-y-1 text-ink-600 dark:text-ink-300">
+          <li>· Retrieval-Augmented Generation (RAG)</li>
+          <li>· Graph Neural Networks · Graph RAG</li>
+          <li>· Large Language Model Reasoning</li>
+          <li>· Time Series Forecasting</li>
+          <li>· Vision-Language Models</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-ink-900 dark:text-ink-100 mb-2 uppercase tracking-wider text-xs">Education</h3>
+        <ul class="space-y-2 text-ink-600 dark:text-ink-300">
+          <li>
+            <div class="font-medium text-ink-800 dark:text-ink-200">M.S., Artificial Intelligence</div>
+            <div class="text-xs">Chungnam National University · 2024–2026</div>
+          </li>
+          <li>
+            <div class="font-medium text-ink-800 dark:text-ink-200">B.S., Mathematics</div>
+            <div class="text-xs">Chungnam National University · 2019–2024</div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="section-line h-px max-w-5xl mx-auto"></div>
+
+<!-- =============== NEWS =============== -->
+<section id="news" class="max-w-5xl mx-auto px-6 py-14">
+  <h2 class="font-serif text-3xl font-bold mb-6 tracking-tight">News</h2>
+
+  <ol class="relative border-l border-ink-200 dark:border-ink-800 ml-2 space-y-5">
+    <li class="timeline-dot relative pl-6 text-brand-600 dark:text-brand-400">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2026.03</span>
+        — Joined <strong>KAERI</strong> as a Post-Master's Researcher.
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2026.03</span>
+        — <strong>MR-Pruner</strong> accepted to <strong>WACV 2026</strong>.
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2026.02</span>
+        — First-author paper <strong>HybRAG</strong> published in <strong>Applied Sciences</strong> (MDPI, SCIE).
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2026.02</span>
+        — Graduated with an M.S. in Artificial Intelligence from CNU.
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2025.11</span>
+        — Awarded <strong>2nd place (KISTI President's Award)</strong> at ScienceON AI Challenge 2025 (as team lead), with first-author paper <strong>MPR-CiteG</strong> at the CIKM Workshop on Retrieval-Driven Generative AI.
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2025.11</span>
+        — Co-author paper accepted to <strong>Knowledge-Based Systems</strong> (SCIE).
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2025.09</span>
+        — <strong>4th-place Special Award</strong> at CIKM 2025 AnalytiCup (Alibaba International), as team lead.
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2025.06</span>
+        — <strong>IAP-ZSAS</strong> accepted to <strong>PAKDD 2025</strong> (co-first author).
+      </div>
+    </li>
+    <li class="timeline-dot relative pl-6 text-ink-400 dark:text-ink-500">
+      <div class="text-ink-900 dark:text-ink-100">
+        <span class="mono text-xs text-ink-500 dark:text-ink-400">2025.05</span>
+        — <strong>DKSVQA</strong> accepted to <strong>The Web Conference (WWW) 2025</strong> Companion.
+      </div>
+    </li>
+  </ol>
+</section>
+
+<div class="section-line h-px max-w-5xl mx-auto"></div>
+
+<!-- =============== PUBLICATIONS =============== -->
+<section id="publications" class="max-w-5xl mx-auto px-6 py-14">
+  <div class="flex items-baseline justify-between mb-6">
+    <h2 class="font-serif text-3xl font-bold tracking-tight">Publications</h2>
+    <a href="https://scholar.google.com/citations?user=1arNStIAAAAJ" target="_blank" rel="noopener"
+       class="text-sm text-brand-700 dark:text-brand-400 hover:underline">Google Scholar →</a>
+  </div>
+
+  <p class="text-xs text-ink-500 dark:text-ink-400 mb-6">
+    <span class="font-semibold text-ink-700 dark:text-ink-200">*</span> denotes first or co-first author.
+    Venue tags — <span class="mono">SCIE</span>: SCIE-indexed journal · <span class="mono">INTL</span>: International conference · <span class="mono">WKSP</span>: Workshop · <span class="mono">DOM</span>: Domestic conference.
+  </p>
+
+  <div class="space-y-4">
+    <!-- PUB 1 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">WACV 2026</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2026.03</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        MR-Pruner: Training-free Multi-resolution Visual Token Pruning for Multi-modal Large Language Models
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 2026)</em>
+      </p>
+      <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Second author</p>
+    </article>
+
+    <!-- PUB 2 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">Applied Sciences (MDPI)</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2026.02</span>
+        <span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 mono font-semibold">★ First author</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Hybrid Retrieval-Augmented Generation: Semantic and Structural Integration for Large Language Model Reasoning
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>Applied Sciences, Vol. 16, Issue 5, Article 2244 (MDPI, SCIE)</em>
+      </p>
+      <div class="mt-2 flex gap-3 text-xs">
+        <a href="https://www.mdpi.com/2076-3417/16/5/2244" target="_blank" rel="noopener"
+           class="text-brand-700 dark:text-brand-400 hover:underline">Paper ↗</a>
+        <a href="https://github.com/2noweyh/HybRAG" target="_blank" rel="noopener"
+           class="text-brand-700 dark:text-brand-400 hover:underline">Code ↗</a>
+      </div>
+    </article>
+
+    <!-- PUB 3 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">Knowledge-Based Systems</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2025.11</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Sequence-aware adaptive graph convolutional recurrent networks for traffic forecasting
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>Knowledge-Based Systems (SCIE)</em>
+      </p>
+      <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Second author</p>
+    </article>
+
+    <!-- PUB 4 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-semibold mono">WKSP</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">CIKM 2025 · RDGenAI</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2025.11</span>
+        <span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 mono font-semibold">★ First author</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        MPR-CiteG: Enhancing RAG with Multi-Portfolio Retrieval and Citation-Grounded Generation
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>1st International Workshop on Retrieval-Driven Generative AI · ScienceON AI Challenge 2025</em>
+      </p>
+      <div class="mt-2 flex gap-3 text-xs">
+        <a href="https://github.com/2noweyh/MPR-citeG" target="_blank" rel="noopener"
+           class="text-brand-700 dark:text-brand-400 hover:underline">Code ↗</a>
+      </div>
+    </article>
+
+    <!-- PUB 5 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">PAKDD 2025</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2025.06</span>
+        <span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 mono font-semibold">★ Co-first author</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Zero-Shot Industrial Anomaly Segmentation with Image-Aware Prompt Generation
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>Pacific-Asia Conference on Knowledge Discovery and Data Mining (PAKDD 2025)</em>
+      </p>
+      <div class="mt-2 flex gap-3 text-xs">
+        <a href="https://github.com/2noweyh/IAP-ZSAS" target="_blank" rel="noopener"
+           class="text-brand-700 dark:text-brand-400 hover:underline">Code ↗</a>
+      </div>
+    </article>
+
+    <!-- PUB 6 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 font-semibold mono">INTL</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">WWW 2025 Companion</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2025.05</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Diverse Knowledge Selection for Enhanced Zero-shot Visual Question Answering
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>The Web Conference 2025 (WWW'25 Companion)</em>
+      </p>
+      <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Second author</p>
+      <div class="mt-2 flex gap-3 text-xs">
+        <a href="https://github.com/2noweyh/DKSVQA" target="_blank" rel="noopener"
+           class="text-brand-700 dark:text-brand-400 hover:underline">Code ↗</a>
+      </div>
+    </article>
+
+    <!-- PUB 7 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-semibold mono">SCIE</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">PeerJ Computer Science</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2025.02</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Dynamic Periodic Event Graphs for Multivariate Time Series Pattern Prediction
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>PeerJ Computer Science (SCIE)</em>
+      </p>
+      <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Second author</p>
+    </article>
+
+    <!-- PUB 8 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 font-semibold mono">DOM</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">KSC 2024</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2024.12</span>
+        <span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 mono font-semibold">★ First author</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        A Methodology for LLM-based Zero-shot Anomaly Segmentation in Road Environments
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>Korea Software Congress 2024 (KSC 2024)</em>
+      </p>
+    </article>
+
+    <!-- PUB 9 -->
+    <article class="card-hover group p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40 hover:border-brand-400/60 dark:hover:border-brand-500/60">
+      <div class="flex flex-wrap gap-2 mb-2 text-xs">
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 font-semibold mono">DOM</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">KSC 2023</span>
+        <span class="px-2 py-0.5 rounded-md bg-ink-100 dark:bg-ink-800 text-ink-700 dark:text-ink-300 mono">2023.12</span>
+      </div>
+      <h3 class="font-serif text-lg font-semibold text-ink-900 dark:text-ink-100 leading-snug">
+        Performance Comparison of Missing-value Imputation Methods for Graph Deep Learning-based Traffic Prediction
+      </h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-1">
+        <em>Korea Software Congress 2023 (KSC 2023)</em>
+      </p>
+      <p class="text-sm text-ink-500 dark:text-ink-400 mt-1">Second author</p>
+    </article>
+  </div>
+</section>
+
+<div class="section-line h-px max-w-5xl mx-auto"></div>
+
+<!-- =============== AWARDS =============== -->
+<section id="awards" class="max-w-5xl mx-auto px-6 py-14">
+  <h2 class="font-serif text-3xl font-bold mb-6 tracking-tight">Awards &amp; Honors</h2>
+
+  <div class="grid md:grid-cols-2 gap-x-10 gap-y-3 text-sm">
+    <div class="flex gap-3 border-b border-ink-100 dark:border-ink-800 py-2">
+      <span class="mono text-ink-500 shrink-0 w-14">2025</span>
+      <span class="text-ink-800 dark:text-ink-200">🏆 <strong>2nd Place · KISTI President's Award</strong> · ScienceON AI Challenge 2025</span>
+    </div>
+    <div class="flex gap-3 border-b border-ink-100 dark:border-ink-800 py-2">
+      <span class="mono text-ink-500 shrink-0 w-14">2025</span>
+      <span class="text-ink-800 dark:text-ink-200">🏅 <strong>4th Place Special Award</strong> · CIKM 2025 AnalytiCup (Alibaba Intl.)</span>
+    </div>
+    <div class="flex gap-3 border-b border-ink-100 dark:border-ink-800 py-2">
+      <span class="mono text-ink-500 shrink-0 w-14">2025</span>
+      <span class="text-ink-800 dark:text-ink-200">🥉 3rd Place · CNU Bio-AI Convergence Competition</span>
+    </div>
+    <div class="flex gap-3 border-b border-ink-100 dark:border-ink-800 py-2">
+      <span class="mono text-ink-500 shrink-0 w-14">2024–25</span>
+      <span class="text-ink-800 dark:text-ink-200">🎓 Academic Excellence Scholarship · CNU</span>
+    </div>
+    <div class="flex gap-3 border-b border-ink-100 dark:border-ink-800 py-2">
+      <span class="mono text-ink-500 shrink-0 w-14">2022</span>
+      <span class="text-ink-800 dark:text-ink-200">💡 CNU Idea Competition Award</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-line h-px max-w-5xl mx-auto"></div>
+
+<!-- =============== CONTACT =============== -->
+<section id="contact" class="max-w-5xl mx-auto px-6 py-14">
+  <h2 class="font-serif text-3xl font-bold mb-6 tracking-tight">Contact</h2>
+
+  <div class="grid md:grid-cols-[2fr_1fr] gap-8">
+    <div class="space-y-3 text-ink-700 dark:text-ink-300">
+      <p class="leading-relaxed">
+        Thanks for visiting. I'm always happy to discuss research on RAG, GNNs, or scientific AI —
+        or to hear about collaboration opportunities. The fastest way to reach me is by email.
+      </p>
+      <ul class="space-y-2 pt-2">
+        <li class="flex items-center gap-3">
+          <span class="mono text-xs text-ink-500 uppercase tracking-wider w-20">Work</span>
+          <a href="mailto:hyewon@kaeri.re.kr" class="text-brand-700 dark:text-brand-400 hover:underline mono">hyewon@kaeri.re.kr</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="mono text-xs text-ink-500 uppercase tracking-wider w-20">Personal</span>
+          <a href="mailto:noweyh927@gmail.com" class="text-brand-700 dark:text-brand-400 hover:underline mono">noweyh927@gmail.com</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="mono text-xs text-ink-500 uppercase tracking-wider w-20">GitHub</span>
+          <a href="https://github.com/2noweyh" target="_blank" rel="noopener" class="text-brand-700 dark:text-brand-400 hover:underline mono">github.com/2noweyh</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="mono text-xs text-ink-500 uppercase tracking-wider w-20">Scholar</span>
+          <a href="https://scholar.google.com/citations?user=1arNStIAAAAJ" target="_blank" rel="noopener" class="text-brand-700 dark:text-brand-400 hover:underline mono">Google Scholar</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="p-5 rounded-xl border border-ink-200 dark:border-ink-800 bg-white dark:bg-ink-900/40">
+      <h3 class="font-serif text-lg font-semibold mb-2">Currently</h3>
+      <p class="text-sm text-ink-600 dark:text-ink-300">
+        <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+        Based in Daejeon, South Korea
+      </p>
+      <p class="text-sm text-ink-600 dark:text-ink-300 mt-2">
+        Post-Master's Researcher<br>
+        <strong>Korea Atomic Energy Research Institute (KAERI)</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== FOOTER =============== -->
+<footer class="max-w-5xl mx-auto px-6 py-10 border-t border-ink-200/60 dark:border-ink-800/60 text-sm text-ink-500 dark:text-ink-400 flex flex-col md:flex-row justify-between gap-3">
+  <div>© <span id="year"></span> Hyewon Lee. All rights reserved.</div>
+  <div class="mono text-xs">Built with Tailwind CSS · Last updated <span id="updated"></span></div>
+</footer>
+
+<script>
+  // --- Dark mode toggle ---
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const iconLight = document.getElementById('theme-icon-light');
+  const iconDark = document.getElementById('theme-icon-dark');
+
+  function applyTheme(mode) {
+    if (mode === 'dark') {
+      root.classList.add('dark');
+      iconLight.classList.remove('hidden');
+      iconDark.classList.add('hidden');
+    } else {
+      root.classList.remove('dark');
+      iconLight.classList.add('hidden');
+      iconDark.classList.remove('hidden');
+    }
+  }
+
+  // Initial mode: saved pref > system
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    applyTheme(saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme('dark');
+  } else {
+    applyTheme('light');
+  }
+
+  btn.addEventListener('click', () => {
+    const isDark = root.classList.contains('dark');
+    const next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
+
+  // --- Footer dates ---
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('updated').textContent = new Date().toISOString().slice(0, 10);
+</script>
+
+</body>
+</html>
